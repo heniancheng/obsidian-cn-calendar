@@ -1,11 +1,11 @@
-<h1 align="center">Dust Calendar</h1>
+<h1 align="center">Obsidian Chinese Calendar</h1>
 
 <p align="center">
     <img alt="Release version" src="https://img.shields.io/github/v/release/a-nano-dust/dust-obsidian-calendar?style=for-the-badge">
     <img alt="Download count" src="https://img.shields.io/github/downloads/a-nano-dust/dust-obsidian-calendar/total?style=for-the-badge">
 </p>
 <p align="center">
-    <span>Dust Calendar 是一款更符合中国习惯的 Obsidian 插件，它提供了日历浏览以及与日历联动的周期性笔记功能。</span>
+    <span>Obsidian Chinese Calendar 是一款更符合中国习惯的 Obsidian 插件，它提供了日历浏览以及与日历联动的周期性笔记功能。</span>
 </p>
 
 
@@ -28,8 +28,8 @@
 
 ### 手动安装
 
-1. 下载 [latest release](https://github.com/a-nano-dust/dust-obsidian-calendar/releases/latest)；
-2. 解压并提取 dust-obsidian-calendar 文件夹，然后放到你 Obsidian 库中的插件目录中 `<仓库根目录>/.obsidian/plugins/` （注意： `.obsidian` 文件夹可能被隐藏了，我们需要先将该文件夹展示出来）
+1. 下载 [latest release](https://github.com/heniancheng/obsidian-cn-calendar/releases/latest)；
+2. 解压并提取 obsidian-cn-calendar 文件夹，然后放到你 Obsidian 库中的插件目录中 `<仓库根目录>/.obsidian/plugins/` （注意： `.obsidian` 文件夹可能被隐藏了，我们需要先将该文件夹展示出来）
 3. 打开 `设置/第三方插件`，启用该插件。
 
 ## 日历视图
@@ -63,7 +63,7 @@
 
 然后，我们需要配置周期性笔记的模板路径（包含笔记所在文件夹和笔记文件名），模板控制字符与 [luxon](https://moment.github.io/luxon/#/formatting?id=table-of-tokens) 相同。
 
-除此之外，Dust Calendar 支持与一些模板插件进行联动，在创建笔记的时候自动应用模板。为了使用这项功能，我们需要选择指定一款模板插件，并为需要使用模板功能的周期性笔记配置模板文件。目前，Dust Calendar 支持 Obsidian 核心插件中的模板和 [Templater](https://github.com/SilentVoid13/Templater) 。
+除此之外，Obsidian Chinese Calendar 支持与一些模板插件进行联动，在创建笔记的时候自动应用模板。为了使用这项功能，我们需要选择指定一款模板插件，并为需要使用模板功能的周期性笔记配置模板文件。目前，Obsidian Chinese Calendar 支持 Obsidian 核心插件中的模板和 [Templater](https://github.com/SilentVoid13/Templater) 。
 
 如下展示了一个可能的配置内容：
 
@@ -99,4 +99,4 @@ Dust Calendar 会统计笔记中的字数和待办，并将这些信息以小圆
 
 ## 联系和反馈
 
-如果你在使用该插件过程中，遇到各种问题、或有什么好的建议，欢迎在 [GitHub issues](https://github.com/a-nano-dust/dust-obsidian-calendar/issues) 中提出。
+如果你在使用该插件过程中，遇到各种问题、或有什么好的建议，欢迎在 [GitHub issues](https://github.com/heniancheng/obsidian-cn-calendar/issues) 中提出。
