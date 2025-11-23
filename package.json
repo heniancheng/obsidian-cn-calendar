@@ -1,14 +1,14 @@
 {
-	"name": "@nano-dust/dust-calendar",
-	"version": "1.4.0",
-	"description": "a calendar plugin for obsidian",
+	"name": "@heniancheng/obsidian-cn-calendar",
+	"version": "1.0.0",
+	"description": "a chinese calendar plugin for obsidian",
 	"main": "main.js",
 	"scripts": {
 		"dev": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production"
 	},
 	"keywords": [],
-	"author": "Nano Dust",
+	"author": "heniancheng",
 	"license": "MIT",
 	"devDependencies": {
 		"@reduxjs/toolkit": "^2.2.1",
@@ -19,7 +19,7 @@
 		"@typescript-eslint/eslint-plugin": "5.29.0",
 		"@typescript-eslint/parser": "5.29.0",
 		"builtin-modules": "3.3.0",
-		"esbuild": "0.20.0",
+		"esbuild": "^0.27.0",
 		"lucide-react": "^0.356.0",
 		"luxon": "^3.4.4",
 		"obsidian": "latest",
@@ -27,7 +27,7 @@
 		"redux": "^5.0.1",
 		"ts-node": "^10.9.2",
 		"tslib": "2.4.0",
-		"typescript": "^4.7.4"
+		"typescript": "^4.9.5"
 	},
 	"dependencies": {
 		"@types/luxon": "^3.4.2",
