@@ -1,8 +1,8 @@
 <h1 align="center">Obsidian Chinese Calendar</h1>
 
 <p align="center">
-    <img alt="Release version" src="https://img.shields.io/github/v/release/a-nano-dust/dust-obsidian-calendar?style=for-the-badge">
-    <img alt="Download count" src="https://img.shields.io/github/downloads/a-nano-dust/dust-obsidian-calendar/total?style=for-the-badge">
+    <img alt="Release version" src="https://img.shields.io/github/v/release/heniancheng/obsidian-cn-calendar?style=for-the-badge">
+    <img alt="Download count" src="https://img.shields.io/github/downloads/heniancheng/obsidian-cn-calendar/total?style=for-the-badge">
 </p>
 <p align="center">
     <span>Obsidian Chinese Calendar 是一款更符合中国习惯的 Obsidian 插件，它提供了日历浏览以及与日历联动的周期性笔记功能。</span>
@@ -22,7 +22,7 @@
 1. 打开 `设置/第三方插件`；
 2. 关闭 `安全模式`；
 3. 点击 `浏览` 按钮来查看第三方插件市场；
-4. 输入搜索：**Dust Calendar**；
+4. 输入搜索：**Obsidian Chinese Calendar**；
 5. 点击 `安装` 按钮；
 6. 一旦安装成功，先关闭当前社区插件窗口，然后在已安装插件列表下激活刚安装的插件；
 
@@ -83,7 +83,7 @@
 
 ### 笔记信息统计
 
-Dust Calendar 会统计笔记中的字数和待办，并将这些信息以小圆点或小圆孔的方式标注在与笔记关联的日历组件上。在插件设置中，允许设置多少字标注一个点以及点数上限，还可以设置待办的标注方式。
+Obsidian Chinese Calendar 会统计笔记中的字数和待办，并将这些信息以小圆点或小圆孔的方式标注在与笔记关联的日历组件上。在插件设置中，允许设置多少字标注一个点以及点数上限，还可以设置待办的标注方式。
 
 ![统计信息设置项](./resource/setting_statistic.jpg)
 
