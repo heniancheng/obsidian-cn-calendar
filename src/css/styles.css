@@ -1,4 +1,11 @@
-
+/** 
+ * Original Copyright (c) 2024 a-nano-dust 
+ * * Modifications Copyright (c) 2025 heniancheng 
+ * * 
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree. 
+ */
+ 
 .d-header-font {
     font-size: calc((15px + var(--d-font-size-factor) * 5px) * var(--d-font-size-custom-enable) + (10px + 0.5 * var(--font-text-size)) * var(--d-font-size-follow-obsidian));
 }
@@ -140,11 +147,11 @@
 }
 
 .month-view-work {
-    color: var(--text-error);
+    color: var(--text-normal);
 }
 
 .month-view-rest {
-    color: var(--text-success);
+    color: var(--text-error);
 }
 
 .statistic-label {
@@ -180,4 +187,19 @@
     line-height: 1.5em;
     text-align: center;
     border-radius: 50%;
+}
+
+/* 未选中状态下非周末的休息日 */
+.month-view-day-item.d-unselected-item.month-view-rest {
+	color: #d9534f !important; /* 统一为红色 */
+}
+
+/* 未选中状态下的周末（非加班） */
+.month-view-day-item.d-unselected-item.weekend {
+  color: #d9534f !important; /* 统一为红色 */
+}
+
+/* 未选中状态下周末的工作日 */
+.month-view-day-item.d-unselected-item.weekend.month-view-work {
+	color: var(--text-normal) !important; /* 统一为红色 */
 }

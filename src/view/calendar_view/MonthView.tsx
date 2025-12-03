@@ -1,6 +1,6 @@
 import {MouseEvent, useContext} from "react";
 import {DateTime} from "luxon";
-import {HolidayUtil} from "lunar-typescript";
+import HolidayUtil from "../../util/HolidayUtil";
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {selectSelectedItem, updateSelectedItem} from "../redux/selectedItemSlice";
 import SelectedItem from "../../entity/SelectedItem";
@@ -15,8 +15,9 @@ import StatisticLabel from "./StatisticLabel";
 function DayItemBody({
                          targetDay,
                          dayListOfMonthView,
-                         isSelected
-                     }: { targetDay: DateTime, dayListOfMonthView: DayListOfMonthView, isSelected: boolean }) {
+                         isSelected,
+                         isWeekend
+                     }: { targetDay: DateTime, dayListOfMonthView: DayListOfMonthView, isSelected: boolean, isWeekend: boolean }) {
 
 
     const plugin = useContext(PluginContext)!;
@@ -32,6 +33,11 @@ function DayItemBody({
     }
     else if (targetDay.hasSame(today, 'year') && targetDay.hasSame(today, 'month') && targetDay.hasSame(today, 'day')) {
         style = style.concat(" month-view-today");
+    }
+
+     // 如果是周末，添加 'weekend' 类
+    if (isWeekend) {
+        style = style.concat(" weekend-day-body"); // 使用不同的类名避免与父元素冲突，或直接覆盖
     }
 
     return <div className={style}>
@@ -89,8 +95,9 @@ function DayItemSuperscript({
 function DayItemFooter({
                            targetDay,
                            dayListOfMonthView,
-                           isSelected
-                       }: { targetDay: DateTime, dayListOfMonthView: DayListOfMonthView, isSelected: boolean }) {
+                           isSelected,
+                           isWeekend
+                       }: { targetDay: DateTime, dayListOfMonthView: DayListOfMonthView, isSelected: boolean, isWeekend: boolean }) {
 
 
     let dayItemFooter = new DayItemFooterEntity(targetDay);
@@ -104,6 +111,11 @@ function DayItemFooter({
     }
     else if (dayItemFooter.type === DayItemFooterType.FESTIVAL || dayItemFooter.type === DayItemFooterType.SOLAR_TERM) {
         style = style.concat(" month-view-special-date");
+    }
+
+    // 如果是周末，添加 'weekend' 类
+    if (isWeekend) {
+        style = style.concat(" weekend-day-footer"); // 使用不同的类名避免与父元素冲突，或直接覆盖
     }
 
     return <div className={style}>{dayItemFooter.text}</div>
@@ -123,6 +135,13 @@ function DayItem({
     newSelectItem.type = SelectedItemType.DAY_ITEM;
     newSelectItem.date = targetDay;
 
+     // 添加判断是否是周末
+     // WeekEnum.SATURDAY=6, WeekEnum.SUNDAY=7
+    const isWeekend = targetDay.weekday === WeekEnum.SATURDAY || targetDay.weekday === WeekEnum.SUNDAY;
+
+    // 获取假期信息并判断是否为休息日
+    const holiday = HolidayUtil.getHoliday(targetDay.year, targetDay.month, targetDay.day);
+    
     // 点击日期会更新已选中对象
     const onClickCallback = (e: MouseEvent<HTMLDivElement>) => {
         // 如果发生连击，只有第一次点击才会切换选中对象，并且能够避免干扰双击事件
@@ -138,12 +157,27 @@ function DayItem({
         bodyStyle = "month-view-day-item d-selected-item";
     }
 
+     // 如果是周末，添加 'weekend' 类
+    if (isWeekend) {
+        bodyStyle = bodyStyle.concat(" weekend");
+    }
+
+    // 如果是休息日，添加 'is-rest-day' 类
+    if (holiday) {
+        if (holiday.isWork()) {
+            bodyStyle = bodyStyle.concat(" month-view-work");
+        }   
+        else {
+            bodyStyle = bodyStyle.concat(" month-view-rest");
+        }
+    }
+
     return <div className={bodyStyle} onClick={onClickCallback}
                 onDoubleClick={() => plugin.noteController.openNoteBySelectedItem(selectedItem)}>
-        <DayItemBody targetDay={targetDay} dayListOfMonthView={dayListOfMonthView} isSelected={isSelected}/>
+        <DayItemBody targetDay={targetDay} dayListOfMonthView={dayListOfMonthView} isSelected={isSelected} isWeekend={isWeekend} />
         {
             plugin.calendarViewController.getShouldDisplayLunarInfo()
-                ? <DayItemFooter targetDay={targetDay} dayListOfMonthView={dayListOfMonthView} isSelected={isSelected}/>
+                ? <DayItemFooter targetDay={targetDay} dayListOfMonthView={dayListOfMonthView} isSelected={isSelected} isWeekend={isWeekend} />
                 : <></>
         }
         <StatisticLabel date={DateTime.local(targetDay.year, targetDay.month, targetDay.day)}
@@ -216,8 +250,8 @@ function MonthViewHeader() {
         <div className="month-view-header-item">三</div>
         <div className="month-view-header-item">四</div>
         <div className="month-view-header-item">五</div>
-        <div className="month-view-header-item">六</div>
-        <div className="month-view-header-item">日</div>
+        <div className="month-view-header-item month-view-header-weekend">六</div> 
+        <div className="month-view-header-item month-view-header-weekend">日</div> 
     </div>
 }
 
