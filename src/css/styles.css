@@ -48,7 +48,7 @@
 }
 
 .d-selected-item {
-    color: var(--text-on-accent);
+    color: var(--text-on-accent) !important;
     background-color: var(--interactive-accent);
 }
 
@@ -201,5 +201,5 @@
 
 /* 未选中状态下周末的工作日 */
 .month-view-day-item.d-unselected-item.weekend.month-view-work {
-	color: var(--text-normal) !important; /* 统一为红色 */
+	color: var(--text-normal) !important; /* 恢复默认颜色 */
 }
