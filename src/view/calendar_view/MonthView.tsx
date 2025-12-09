@@ -161,6 +161,11 @@ function DayItem({
 
      // 如果是周末，添加 'weekend' 类
     let bodyContentWrapperStyle = "day-item-content-wrapper";
+
+    if (targetDay.month !== dayListOfMonthView.month) {
+        bodyContentWrapperStyle = bodyContentWrapperStyle.concat(" month-view-other-month");
+    }
+
     if (isWeekend) {
         bodyContentWrapperStyle = bodyContentWrapperStyle.concat(" weekend");
     }

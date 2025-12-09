@@ -142,7 +142,7 @@
 .month-view-today-selected {
 }
 
-.month-view-other-month {
+.day-item-content-wrapper.month-view-other-month {
     opacity: 0.2;
 }
 
@@ -195,6 +195,7 @@
 .month-view-day-item.d-unselected-item .day-item-content-wrapper.month-view-rest {
 	color: #d9534f !important; /* 统一为红色 */
     border: 1px solid var(--color-red);
+    border-radius: 4px;
 }
 
 /* 未选中状态下的周末（非加班） */
@@ -206,4 +207,5 @@
 .month-view-day-item.d-unselected-item .day-item-content-wrapper.weekend.month-view-work {
 	color: var(--text-normal) !important; /* 恢复默认颜色 */
     border: 1px solid var(--text-normal);
+    border-radius: 4px;
 }
