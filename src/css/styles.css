@@ -146,13 +146,15 @@
     opacity: 0.2;
 }
 
-.month-view-work {
+/* .month-view-work {
     color: var(--text-normal);
+    border: 1px solid var(--text-normal);
 }
 
 .month-view-rest {
     color: var(--text-error);
-}
+    border: 1px solid var(--color-red);
+} */
 
 .statistic-label {
     max-width: calc((16px + var(--d-font-size-factor) * 4px) * var(--d-font-size-custom-enable) + (12px + 0.4 * var(--font-text-size)) * var(--d-font-size-follow-obsidian));
@@ -190,16 +192,18 @@
 }
 
 /* 未选中状态下非周末的休息日 */
-.month-view-day-item.d-unselected-item.month-view-rest {
+.month-view-day-item.d-unselected-item .day-item-content-wrapper.month-view-rest {
 	color: #d9534f !important; /* 统一为红色 */
+    border: 1px solid var(--color-red);
 }
 
 /* 未选中状态下的周末（非加班） */
-.month-view-day-item.d-unselected-item.weekend {
+.month-view-day-item.d-unselected-item .day-item-content-wrapper.weekend {
   color: #d9534f !important; /* 统一为红色 */
 }
 
 /* 未选中状态下周末的工作日 */
-.month-view-day-item.d-unselected-item.weekend.month-view-work {
+.month-view-day-item.d-unselected-item .day-item-content-wrapper.weekend.month-view-work {
 	color: var(--text-normal) !important; /* 恢复默认颜色 */
+    border: 1px solid var(--text-normal);
 }

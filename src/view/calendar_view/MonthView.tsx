@@ -79,11 +79,11 @@ function DayItemSuperscript({
     }
     else {
         if (holiday.isWork()) {
-            style = style.concat(" month-view-work");
+            // style = style.concat(" month-view-work");
             text = "班";
         }
         else {
-            style = style.concat(" month-view-rest");
+            // style = style.concat(" month-view-rest");
             text = "休";
         }
     }
@@ -152,36 +152,43 @@ function DayItem({
 
     // 被选中和未被选中日期的背景颜色不同
     let bodyStyle = "month-view-day-item d-unselected-item";
+    
+     // 判断是否被选中
     const isSelected: boolean = selectedItem.type === SelectedItemType.DAY_ITEM && selectedItem.date.year === targetDay.year && selectedItem.date.month === targetDay.month && selectedItem.date.day === targetDay.day;
     if (isSelected) {
         bodyStyle = "month-view-day-item d-selected-item";
     }
 
      // 如果是周末，添加 'weekend' 类
+    let bodyContentWrapperStyle = "day-item-content-wrapper";
     if (isWeekend) {
-        bodyStyle = bodyStyle.concat(" weekend");
+        bodyContentWrapperStyle = bodyContentWrapperStyle.concat(" weekend");
     }
 
     // 如果是休息日，添加 'is-rest-day' 类
     if (holiday) {
         if (holiday.isWork()) {
-            bodyStyle = bodyStyle.concat(" month-view-work");
+            bodyContentWrapperStyle = bodyContentWrapperStyle.concat(" month-view-work");
         }   
         else {
-            bodyStyle = bodyStyle.concat(" month-view-rest");
+            bodyContentWrapperStyle = bodyContentWrapperStyle.concat(" month-view-rest");
         }
     }
 
     return <div className={bodyStyle} onClick={onClickCallback}
                 onDoubleClick={() => plugin.noteController.openNoteBySelectedItem(selectedItem)}>
-        <DayItemBody targetDay={targetDay} dayListOfMonthView={dayListOfMonthView} isSelected={isSelected} isWeekend={isWeekend} />
-        {
-            plugin.calendarViewController.getShouldDisplayLunarInfo()
-                ? <DayItemFooter targetDay={targetDay} dayListOfMonthView={dayListOfMonthView} isSelected={isSelected} isWeekend={isWeekend} />
-                : <></>
-        }
-        <StatisticLabel date={DateTime.local(targetDay.year, targetDay.month, targetDay.day)}
-                        noteType={NoteType.DAILY}/>
+        <div className={bodyContentWrapperStyle}> {/* 新增：包裹 DayItemBody 和 DayItemFooter */}
+            <DayItemBody targetDay={targetDay} dayListOfMonthView={dayListOfMonthView} isSelected={isSelected} isWeekend={isWeekend} />
+            {
+                plugin.calendarViewController.getShouldDisplayLunarInfo()
+                    ? <DayItemFooter targetDay={targetDay} dayListOfMonthView={dayListOfMonthView} isSelected={isSelected} isWeekend={isWeekend} />
+                    : <></>
+            }
+        </div>
+         <div className="day-item-statistic-wrapper"> {/* 新增：包裹 StatisticLabel */}
+            <StatisticLabel date={DateTime.local(targetDay.year, targetDay.month, targetDay.day)}
+                            noteType={NoteType.DAILY}/>
+        </div>
     </div>
 }
 
