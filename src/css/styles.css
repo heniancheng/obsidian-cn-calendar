@@ -21,6 +21,7 @@
 .d-script-font {
     font-size: calc((8px + var(--d-font-size-factor) * 2px) * var(--d-font-size-custom-enable) + (6px + 0.2 * var(--font-text-size)) * var(--d-font-size-follow-obsidian));
     font-weight: bold;
+    margin-left: 1px;
 }
 
 .d-setting-accent {

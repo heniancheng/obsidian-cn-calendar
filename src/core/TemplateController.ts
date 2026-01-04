@@ -113,16 +113,28 @@ export default class TemplateController {
             return;
         }
 
-        this.notify(this, templateFile);
+        this.notify(this, templateFile, 0);
     }
 
-    public notify(templateController: TemplateController, templateFile: TAbstractFile) {
-        // 循环等待新创建的文件可被编辑，再插入模板
-        if (templateController.plugin.app.workspace.activeEditor !== null) {
-            templateController.insertTemplateImpl(templateFile);
+    public notify(templateController: TemplateController, templateFile: TAbstractFile, retryCount: number = 0) {
+        const MAX_RETRIES = 30; // 最大重试次数，例如 30 * 100ms = 3 秒
+        const DELAY_MS = 100;   // 每次重试的延迟（毫秒）
+        if (retryCount >= MAX_RETRIES) {
+            console.error("TemplateController Plugin: 超过最大重试次数，无法插入模板，没有活动编辑器或编辑器未准备好。", templateFile.path);
+            return;
         }
-        else {
-            setTimeout(() => templateController.notify(templateController, templateFile), 100);
+        const activeLeaf = this.plugin.app.workspace.activeLeaf;
+        const activeEditor = this.plugin.app.workspace.activeEditor;
+        // 检查是否有活动工作区叶子，并且它是 Markdown 视图，同时有活动编辑器
+        if (activeLeaf && activeLeaf.view.getViewType() === "markdown" && activeEditor) {
+            // 编辑器似乎已经准备好，但为了确保 Templater 也有足够的时间进行其内部检查，
+            // 额外增加一个小的延迟。
+            setTimeout(() => {
+                this.insertTemplateImpl(templateFile);
+            }, 50); 
+        } else {
+            // 如果编辑器尚未准备好，则在 DELAY_MS 后重试
+            setTimeout(() => templateController.notify(templateController,templateFile, retryCount + 1), DELAY_MS);
         }
     }
 
